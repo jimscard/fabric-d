@@ -5,7 +5,9 @@
 # Install yt-dlp using pipx for isolated installation
 # Switch to a non-root user for better security practices
 # Use the official Fabric image (Alpine-based)
-FROM jimscard/fabric:1.0
+# FROM jimscard/fabric:1.1
+FROM kavan/fabric:latest # Use the latest version of the Fabric image for the latest features and security updates
+
 # Install system dependencies, create virtual environment, and install yt-dlp
 RUN apk add --no-cache python3 py3-pip && \
     python3 -m venv /opt/venv && \
