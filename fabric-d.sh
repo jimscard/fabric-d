@@ -24,7 +24,7 @@ if [ $# -eq 0 ]; then
     echo "Usage: $0 <fabric-command> [args...]"
     exit 1
 fi
-docker run --rm -it -p 8080:8080 -v "$HOME/.fabric-config:/home/appuser/.config/fabric" jimscard/fabric-yt "$@"
+docker run --rm -it -p 8080:8080 -v "$HOME/.fabric-config:/home/appuser/.config/fabric" jimscard/fabric-yt:latest "$@"
 # Check if the user provided a command
 if [ $? -ne 0 ]; then
     echo "Error: Failed to run the Fabric command in the Docker container."

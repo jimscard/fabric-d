@@ -12,5 +12,5 @@ docker run --rm -d \
   --name fabric-server \
   -p 8080:8080 \
   -v "$HOME/.fabric-config:/home/appuser/.config/fabric" \
-  jimscard/fabric-yt --serve
+  jimscard/fabric-yt:latest --serve
 echo "Fabric development environment is running on port 8080."
