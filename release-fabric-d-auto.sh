@@ -82,6 +82,18 @@ fi
 # -------------------------------
 # 6. CREATE SOURCE ARCHIVE
 # -------------------------------
+# Verify tag exists locally. If not, fetch from the remote repository.
+if ! git rev-parse --verify "$NEW_TAG" >/dev/null 2>&1; then
+  echo "⚠️ Tag $NEW_TAG not found locally. Attempting to fetch tags from origin..."
+  git fetch origin --tags
+
+  # Double-check if the tag exists
+  if ! git rev-parse --verify "$NEW_TAG" >/dev/null 2>&1; then
+    echo "❌ Tag $NEW_TAG does not exist remotely either. Aborting release."
+    exit 1
+  fi
+fi
+
 echo "📦 Creating source archive: fabric-d-$NEW_TAG.tar.gz"
 git archive --format=tar.gz \
   --output="fabric-d-$NEW_TAG.tar.gz" \
