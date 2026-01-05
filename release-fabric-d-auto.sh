@@ -71,13 +71,21 @@ git fetch origin main --tags
 # -------------------------------
 # 5. CREATE TAG (if not exists)
 # -------------------------------
-if ! git tag -l "$NEW_TAG" > /dev/null; then
+if [[ -z "$(git tag -l "$NEW_TAG")" ]]; then
   echo "📦 Creating tag: $NEW_TAG"
   git tag -a "$NEW_TAG" -m "Release $NEW_TAG"
   git push origin "$NEW_TAG"
 else
   echo "⚠️ Tag $NEW_TAG already exists. Proceeding to create release..."
 fi
+
+# Validate that the tag is a valid git object
+if ! git rev-parse "$NEW_TAG" >/dev/null 2>&1; then
+  echo "❌ Error: Tag $NEW_TAG does not exist or is not a valid git object." >&2
+  echo "   Please ensure the tag was created successfully and points to a valid commit." >&2
+  exit 1
+fi
+echo "✅ Tag $NEW_TAG validated successfully"
 
 # -------------------------------
 # 6. CREATE SOURCE ARCHIVE
