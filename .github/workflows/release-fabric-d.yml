@@ -17,6 +17,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: main
+          fetch-depth: 0
 
       - name: Set up Git
         run: |
