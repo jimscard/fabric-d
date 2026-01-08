@@ -13,9 +13,7 @@ This repository provides containerized wrapper scripts for the [fabric](https://
 - **release-fabric-d-auto.sh**: Automated release script using GitHub CLI
 
 ### Docker Image
-- Uses `jimscard/fabric-yt:latest` Docker image
-- Based on `kayvan/fabric:latest` with additional yt-dlp support
-- Runs as non-root user `appuser` for security
+- Uses `kayvan/fabric:latest` Docker image
 - Exposes port 8080 for the fabric server
 
 ### Configuration
