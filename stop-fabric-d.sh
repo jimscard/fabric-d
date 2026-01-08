@@ -1,6 +1,6 @@
 #!/bin/bash
 # Stop the Fabric server container
-if [ "$(docker ps -q -f name=fabric-server)" ]; then
+if [[ "$(docker ps -q -f name=fabric-server)" ]]; then
     echo "Stopping Fabric server container..."
     if docker stop fabric-server; then
         echo "Fabric server container stopped."
@@ -10,7 +10,7 @@ if [ "$(docker ps -q -f name=fabric-server)" ]; then
     fi
 fi
 
-if [ "$(docker ps -a -q -f name=fabric-server)" ]; then
+if [[ "$(docker ps -a -q -f name=fabric-server)" ]]; then
     echo "Removing Fabric server container..."
     docker rm fabric-server
 fi

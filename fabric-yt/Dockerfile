@@ -1,31 +1,18 @@
 
 # Use the official Fabric image (Alpine-based)
-# This image extends jimscard/fabric to include yt-dlp
-# jimscard/fabric is built from the official fabric Dockerfile
-# Install yt-dlp using pipx for isolated installation
-# Switch to a non-root user for better security practices
-# Use the official Fabric image (Alpine-based)
-# FROM jimscard/fabric:1.1
-# Use the latest version of the Fabric image for the latest features and security updates
+# This Dockerfile customizes the base fabric image to run as a non-root user
+# for better security practices. The base image now includes yt-dlp.
 FROM kayvan/fabric:latest
-# Install system dependencies, create virtual environment, and install yt-dlp
-RUN apk add --no-cache python3 py3-pip && \
-    python3 -m venv /opt/venv && \
-    /opt/venv/bin/pip install yt-dlp
-
-# Ensure /opt/venv/bin is in PATH
-ENV PATH="/opt/venv/bin:${PATH}"
 
 # Create non-root user
 RUN adduser -D appuser
-# Switch to non-root user
-USER appuser
 
 # Switch to non-root user
 USER appuser
 
-# Verify installation
-RUN yt-dlp --version
+# Add healthcheck to monitor fabric server availability
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget --quiet --tries=1 --spider http://localhost:8080/ || exit 1
 
 # Default command to start Fabric server
 CMD ["fabric", "--serve"]

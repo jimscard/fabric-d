@@ -14,5 +14,5 @@ docker run -d \
 	--restart unless-stopped \
 	-p 8080:8080 \
 	-v "${HOME}/.fabric-config:/home/appuser/.config/fabric" \
-	kayvan/fabric:latest --serve
+	jimscard/fabric-yt:latest --serve
 echo "Fabric server is running on port 8080."
