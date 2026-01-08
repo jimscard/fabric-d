@@ -46,7 +46,8 @@ if [[ $# -eq 0 ]]; then
     NEW_TAG="v$MAJOR.$MINOR.$NEW_PATCH"
   fi
 else
-  NEW_TAG="$1"
+  # Trim leading and trailing whitespace from the input
+  NEW_TAG="$(echo "$1" | xargs)"
   if [[ ! "$NEW_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     echo "❌ Invalid tag format. Use: v1.2.3"
     exit 1
