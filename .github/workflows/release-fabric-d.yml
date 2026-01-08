@@ -2,11 +2,9 @@ name: Release fabric-d (auto)
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to release (e.g., v1.2.0). Leave blank to auto-increment patch.'
-        required: false
-        default: ''
+
+permissions:
+  contents: write
 
 jobs:
   release:
@@ -28,5 +26,5 @@ jobs:
         run: |
           # Make sure script is executable
           chmod +x release-fabric-d-auto.sh
-          # Run with optional override
-          ./release-fabric-d-auto.sh "${{ inputs.version }}"
+          # Run script
+          ./release-fabric-d-auto.sh
