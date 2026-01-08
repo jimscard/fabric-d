@@ -113,7 +113,7 @@ gh release create "$NEW_TAG" \
   --title "Release $NEW_TAG" \
   --notes "Automated release from script. Includes source archive." \
   --verify-tag \
-  --file "fabric-d-$NEW_TAG.tar.gz"
+  "fabric-d-$NEW_TAG.tar.gz"
 
 echo "✅ Release $NEW_TAG created successfully!"
 echo "🔗 Release URL: $REPO_URL/releases/tag/$NEW_TAG"
