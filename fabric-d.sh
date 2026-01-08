@@ -6,8 +6,8 @@
 # and maps port 8080 for any web services. It also uses a non-root user inside the container.
 # 
 # 
-if [ ! -d "$HOME/.fabric-config" ]; then # Ensure the config directory exists
-    mkdir -p "$HOME/.fabric-config"
+if [ ! -d "${HOME}/.fabric-config" ]; then # Ensure the config directory exists
+    mkdir -p "${HOME}/.fabric-config"
     if [ $? -ne 0 ]; then
         echo "Error: Unable to create configuration directory at $HOME/.fabric-config"
         exit 1
@@ -24,7 +24,7 @@ if [ $# -eq 0 ]; then
     echo "Usage: $0 <fabric-command> [args...]"
     exit 1
 fi
-docker run --rm -it -p 8080:8080 -v "$HOME/.fabric-config:/home/appuser/.config/fabric" jimscard/fabric-yt:latest "$@"
+docker run --rm -it -p 8080:8080 -v "${HOME}/.fabric-config:/home/appuser/.config/fabric" kayvan/fabric:latest "$@"
 # Check if the user provided a command
 if [ $? -ne 0 ]; then
     echo "Error: Failed to run the Fabric command in the Docker container."
