@@ -71,12 +71,12 @@ git fetch origin main --tags
 # -------------------------------
 # 5. CREATE TAG (if not exists)
 # -------------------------------
-if ! git tag -l "$NEW_TAG" > /dev/null; then
+if git tag -l "$NEW_TAG" | grep -q "$NEW_TAG"; then
+  echo "⚠️ Tag $NEW_TAG already exists. Proceeding to create release..."
+else
   echo "📦 Creating tag: $NEW_TAG"
   git tag -a "$NEW_TAG" -m "Release $NEW_TAG"
   git push origin "$NEW_TAG"
-else
-  echo "⚠️ Tag $NEW_TAG already exists. Proceeding to create release..."
 fi
 
 # -------------------------------
